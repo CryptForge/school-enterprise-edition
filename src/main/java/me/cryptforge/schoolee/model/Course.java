@@ -1,6 +1,10 @@
 package me.cryptforge.schoolee.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "course")
@@ -15,6 +19,10 @@ public class Course {
 
     @Column(name = "credits", nullable = false)
     private Integer credits;
+
+    @ManyToMany(mappedBy = "courses")
+    @JsonIgnore
+    private List<Student> students = new ArrayList<>();
 
     public Course() {
     }

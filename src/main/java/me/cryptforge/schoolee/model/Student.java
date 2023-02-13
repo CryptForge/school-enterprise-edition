@@ -1,6 +1,10 @@
 package me.cryptforge.schoolee.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "student")
@@ -15,6 +19,22 @@ public class Student {
 
     @Column(name = "grade", nullable = false)
     private Integer grade;
+
+    @ManyToOne
+    @JsonBackReference
+    private School school;
+
+    @OneToOne
+    @JoinColumn(name = "contact_id")
+    private Contact contact;
+
+    @ManyToMany
+    @JoinTable(
+            name = "student_courses",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Course> courses = new ArrayList<>();
 
     public Student() {
     }

@@ -1,5 +1,6 @@
 package me.cryptforge.schoolee.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +16,10 @@ public class Contact {
 
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
+
+    @OneToOne(mappedBy = "contact")
+    @JsonIgnore
+    private Student student;
 
     public Contact() {
     }

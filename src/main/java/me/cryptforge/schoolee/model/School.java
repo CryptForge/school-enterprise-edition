@@ -1,6 +1,10 @@
 package me.cryptforge.schoolee.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "school")
@@ -18,6 +22,10 @@ public class School {
 
     @Column(name = "city", nullable = false)
     private String city;
+
+    @OneToMany
+    @JsonManagedReference
+    private List<Student> students = new ArrayList<>();
 
     public School() {}
 
